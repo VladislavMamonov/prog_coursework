@@ -1,7 +1,7 @@
 all: bin/sorting
 
 bin/sorting: build/main.o build/InsertionSort.o build/HeapSort.o build/AdditionalFunctions.o
-	gcc -Wall -Werror -L. -LibSort build/main.o build/InsertionSort.o build/HeapSort.o build/AdditionalFunctions.o -o bin/sorting
+	gcc -Wall -Werror -L. build/main.o build/InsertionSort.o build/HeapSort.o build/AdditionalFunctions.o -o bin/sorting
 
 build/main.o: src/main.c
 	gcc -Wall -Werror -c src/main.c -o build/main.o
@@ -17,4 +17,5 @@ build/AdditionalFunctions.o: src/AdditionalFunctions.c
 
 
 clean:
-	rm -rf build/*.o bin/sorting
+	rm -rf build/*.o bin/sorting 
+	rm -rf build/*.so

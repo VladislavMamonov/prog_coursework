@@ -4,7 +4,6 @@
 #include <sys/time.h>
 
 #define INT uint32_t
-#define n 50000
 
 double wtime()
 {

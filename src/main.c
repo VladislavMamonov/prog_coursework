@@ -3,39 +3,42 @@
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define INT uint32_t
-#define n 50000
 
-int main()
+int main(int argc, char* argv[])
 {
-    INT* arr = NULL;
+    INT n;
 
-    arr = (INT*)malloc(n * sizeof(INT));
-    if (arr == NULL) {
-        printf("Memory allocation error\n");
-        exit(1);
+    if (argc != 2) {
+        printf("Usage:\nHeapSort or InsertionSort\n");
+        return -1;
     }
 
-    for (INT i = 0; i < n; i++)
-        arr[i] = getrand(0, 1000);
+    if (strcmp(argv[1], "InsertionSort") == 0 || strcmp(argv[1], "HeapSort") == 0) {
+        printf("Input array size: ");
+        scanf("%d", &n);
 
-    printf("Press '1' for Insertion Sort\n");
-    printf("Press '2' for Heap Sort\n");
+        INT* arr = NULL;
 
-    short choice;
-    scanf("%hd", &choice);
+        arr = (INT*)malloc(n * sizeof(INT));
+        if (arr == NULL) {
+            printf("Memory allocation error\n");
+            return -1;
+        }
 
-    if (choice != 1 && choice != 2) {
-        printf("Unknown sort\n");
-    }
+        for (INT i = 0; i < n; i++)
+            arr[i] = getrand(0, 10000); /*Заполняем массив псевдослучайными числами*/
 
-    if (choice == 1) {
-        InsertionSort(arr);
-    }
+        if (strcmp(argv[1], "HeapSort") == 0)
+            HeapSort(n, arr);
+        if (strcmp(argv[1], "InsertionSort") == 0)
+            InsertionSort(n, arr);
 
-    if (choice == 2) {
-        HeapSort(arr);
+    } else {
+        printf("Usage:\nHeapSort or InsertionSort\n");
+        return -1;
     }
 
     return 0;
